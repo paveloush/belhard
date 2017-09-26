@@ -11,8 +11,6 @@ class Accounts:
         else:
             print('Card #',card_id, 'already exists in DB')
 
-
-
 class Atm(Accounts):
     def __init__(self, card_id, password):
         self.card_id = card_id
@@ -38,11 +36,28 @@ class Atm(Accounts):
 
 
 
-a = Accounts()
-a.add_card(12345678, 1111, 500)
-a.add_card(54321000, 2222, 100)
-b = Accounts()
-b.add_card(54321000, 2222, 100)
-c = Atm(54321000, 2222)
-c.cash(50)
-c.check()
+while True:
+    message = input('print \'add card\' or \'atm\' to start')
+    if message == 'add card':
+        id = input('enter card id')
+        pas = int(input('enter password'))
+        money = int(input('enter amount of money'))
+        a = Accounts()
+        a.add_card(id, pas, money)
+    elif message == 'atm':
+        id = input('enter card id')
+        pas = int(input('enter password'))
+        atm = Atm(id, pas)
+        while True:
+            operation = input('print \'cashout\' or \'balance\' ')
+            if operation == 'cashout':
+                s = int(input('choose a summ'))
+                atm.cash(s)
+            elif operation == 'balance':
+                atm.check()
+            exit = input('print \'exit\' to exit or press Enter to continue working with your card')
+            if exit == 'exit':
+                break
+    exit = input('print \'exit\' to exit or press Enter to continue')
+    if exit == 'exit':
+        break
